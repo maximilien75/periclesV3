@@ -1,0 +1,4 @@
+# Canonicalize on https://www.prepapericles.com
+# (Netlify terminates TLS before matching, so http/https apex both need a rule)
+http://prepapericles.com/*   https://www.prepapericles.com/:splat   301!
+https://prepapericles.com/*  https://www.prepapericles.com/:splat   301!

@@ -1,0 +1,16 @@
+# Prépa Périclès
+
+> Préparation individuelle aux concours administratifs de catégorie A et A+ (Instituts du service public / ex-IRA, INET, INSP, EN3S, EHESP, inspecteur des finances publiques, inspecteur des douanes). Accompagnement individualisé en visioconférence ou en présentiel à Paris et en Île-de-France, séances d'une heure ou heure trente, correction guidée des devoirs entre les séances. Tarif : 70 € par heure.
+
+## Pages
+
+- [Accueil — Prépa Concours](https://www.prepapericles.com/) : présentation générale, concours préparés, méthode, épreuves travaillées, tarif.
+- [Coaching Grand Oral](https://www.prepapericles.com/coaching-grand-oral/) : préparation aux épreuves orales d'admission.
+- [Fiches méthode](https://www.prepapericles.com/fiches-methode/) : fiches méthodologiques en accès libre.
+  - [La note de synthèse](https://www.prepapericles.com/fiches-methode/note-de-synthese/)
+  - [L'introduction de composition](https://www.prepapericles.com/fiches-methode/introduction-composition/)
+  - [Le cas pratique](https://www.prepapericles.com/fiches-methode/cas-pratique/)
+- [Contact](https://www.prepapericles.com/contact/) : prise de rendez-vous, e-mail, WhatsApp.
+- [Mentions légales](https://www.prepapericles.com/mentions-legales/)
+
+This file is a concise pointer for language models and AI crawlers. It does not replace the sitemap, the HTML content, or the structured data (JSON-LD) published on each page.
