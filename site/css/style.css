@@ -350,7 +350,7 @@ img { max-width: 100%; }
   display: flex;
   flex-wrap: wrap;
   gap: 28px;
-  align-items: end;
+  align-items: center;
   justify-content: space-between;
 }
 .cta-split h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(23px, 2.8vw, 34px); margin: 0; max-width: 24ch; }
