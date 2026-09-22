@@ -216,7 +216,7 @@ img { max-width: 100%; }
 .hero h1 {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(29px, 3.7vw, 48px);
+  font-size: clamp(29px, 3.3vw, 43px);
   line-height: 1.28;
   margin: 0 0 28px;
   text-wrap: pretty;
@@ -253,6 +253,19 @@ img { max-width: 100%; }
 }
 .hero-list li { font-family: var(--serif); font-size: 17px; line-height: 1.5; }
 .hero-ref { font-size: 15px; line-height: 1.7; color: var(--text-muted); font-weight: 300; margin: 0; font-style: italic; }
+
+/* Bottoms of both hero columns line up: CTA button, side border and closing line end together. */
+@media (min-width: 601px) {
+  .hero { align-items: stretch; }
+  .hero > div:first-child { display: flex; flex-direction: column; align-items: flex-start; }
+  .hero-cta { margin-top: auto; }
+  .hero-side { display: flex; flex-direction: column; }
+  .hero-ref { margin-top: auto; }
+}
+/* Two hero columns sit side by side from 759px: drop the closing line so its baseline meets the CTA's bottom edge. */
+@media (min-width: 759px) {
+  .hero-ref { position: relative; top: 0.5em; }
+}
 
 /* ---------- Generic sections ---------- */
 
