@@ -321,19 +321,30 @@ img { max-width: 100%; }
 
 /* Équipe / tarif */
 .grid-team { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(28px, 4vw, 64px); }
-.grid-team h2 { font-size: 12.5px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--navy); margin: 0 0 20px; }
+.grid-team h2 { font-size: 12.5px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--navy); margin: 0; }
 .grid-team p { font-size: 17px; line-height: 1.8; color: var(--text); font-weight: 300; margin: 0; }
+.team-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  column-gap: 24px;
+  margin-bottom: 28px;
+}
 .team-price { border-left: 1px solid var(--navy); padding-left: clamp(22px, 3vw, 40px); }
-.team-price .price { font-family: var(--serif); font-size: clamp(26px, 3vw, 34px); margin: 0 0 16px; }
+.team-price .price { font-family: var(--serif); font-size: clamp(26px, 3vw, 34px); line-height: 1.4; margin: 0; }
 .team-price .price span { font-family: var(--sans); font-size: 16px; font-weight: 300; color: var(--text-muted); }
 .grid-team p.body { font-size: 16px; line-height: 1.8; color: var(--text-soft); font-weight: 300; margin: 0 0 14px; }
 .team-price p.muted { font-size: 16px; line-height: 1.8; color: var(--text-muted); font-weight: 300; margin: 0; }
 
-/* Side by side, both columns share row tracks (title / price / text) so the left text starts level with the right text, under the price. */
-@media (min-width: 700px) {
-  .grid-team { grid-template-rows: auto auto auto; row-gap: 0; }
-  .grid-team > div { display: grid; grid-template-rows: subgrid; grid-row: span 3; }
-  .grid-team > div > .team-text { grid-row: 3; }
+/* Side by side, the left heading gets an invisible strut in the price's font so both heading rows share the price's height and baseline. */
+@media (min-width: 683px) {
+  .grid-team > div:first-child .team-head::after {
+    content: "\200b";
+    font-family: var(--serif);
+    font-size: clamp(26px, 3vw, 34px);
+    line-height: 1.4;
+  }
 }
 
 /* ---------- Pages simples (oral, méthode) ---------- */
@@ -540,8 +551,8 @@ main { flex: 1; }
   .home .grid-3col p { font-size: 15.5px; line-height: 1.7; }
 
   .home .grid-team { gap: 30px; }
-  .home .grid-team h2 { margin-bottom: 14px; }
+  .home .team-head { margin-bottom: 14px; }
   .home .grid-team p { font-size: 16px; line-height: 1.7; }
-  .home .team-price .price { font-size: 26px; margin-bottom: 12px; }
+  .home .team-price .price { font-size: 26px; }
   .home .grid-team p.body, .home .team-price p.muted { font-size: 15.5px; line-height: 1.7; }
 }
