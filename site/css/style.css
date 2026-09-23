@@ -302,6 +302,13 @@ img { max-width: 100%; }
 .card-navy h3 { font-family: var(--serif); font-weight: 400; font-size: 20px; margin: 0 0 14px; line-height: 1.4; }
 .card-navy p { font-size: 15.5px; line-height: 1.8; color: #dde3ee; font-weight: 300; margin: 0; }
 
+/* With the three method cards on one row, they share row tracks (number / title / text) so every text starts under the tallest title.
+   925px rather than the 907px layout switch leaves room for classic 17px scrollbars, where cards are still on two rows. */
+@media (min-width: 925px) {
+  .home .grid-cards { grid-template-rows: auto auto auto; row-gap: 0; }
+  .home .card-navy { display: grid; grid-template-rows: subgrid; grid-row: span 3; }
+}
+
 .card-navy-alt { border-top: 1px solid rgba(255, 255, 255, 0.4); padding-top: 20px; }
 .card-navy-alt h3 { font-family: var(--serif); font-weight: 400; font-size: 19px; margin: 0 0 12px; }
 .card-navy-alt p { font-size: 15.5px; line-height: 1.8; color: #dde3ee; font-weight: 300; margin: 0; }
