@@ -1,4 +1,3 @@
-# Canonicalize on https://www.prepapericles.com
-# (Netlify terminates TLS before matching, so http/https apex both need a rule)
-http://prepapericles.com/*   https://www.prepapericles.com/:splat   301!
-https://prepapericles.com/*  https://www.prepapericles.com/:splat   301!
+# Canonicalisation vers https://www.prepapericles.com :
+# gérée par une Redirect Rule dans le tableau de bord Cloudflare (prepapericles.com/* -> www, 301),
+# pas dans ce fichier, qui n'accepte ni URL absolue en source ni statut « 301! ».
