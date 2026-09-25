@@ -94,6 +94,8 @@ img { max-width: 100%; }
 /* « Prépa Concours » dropdown — opens on hover and keyboard focus, no JavaScript.
    The wrapper's vertical padding keeps the pointer inside it on the way down to the panel. */
 .nav-dropdown { position: relative; padding: 22px 0; margin: -22px 0; }
+/* Inside the wrapper the link is no longer a flex item: make it a block again so it sits like its siblings. */
+.nav-dropdown > a { display: block; }
 .nav-dropdown-panel {
   display: none;
   position: absolute;
