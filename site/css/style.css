@@ -678,6 +678,7 @@ form.contact-form { display: flex; flex-direction: column; gap: 20px; }
 .epreuves-table td { background: var(--bg-soft); border-bottom: 1px solid var(--border); font-size: 13px; color: var(--text-soft); }
 .epreuves-table td:first-child { font-family: var(--serif); font-size: 15px; color: var(--ink); }
 .epreuves-table td:last-child { font-size: 14px; }
+.cell-na { font-style: italic; color: var(--text-muted); }
 
 /* 04 Les épreuves — présentation */
 .concours-subhead { margin: 0 0 20px; font-size: 13px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); display: flex; align-items: center; gap: 14px; }
