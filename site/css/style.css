@@ -628,10 +628,11 @@ form.contact-form { display: flex; flex-direction: column; gap: 20px; }
 .voie-toggle > summary { list-style: none; cursor: pointer; }
 .kf-more > summary::-webkit-details-marker,
 .voie-toggle > summary::-webkit-details-marker { display: none; }
-.kf-more > summary { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 10px 18px; border: 1px solid var(--navy); color: var(--navy); font-size: 13px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; }
+.kf-more > summary { display: inline-flex; align-items: center; gap: 7px; min-height: 30px; padding: 6px 12px; border: 1px solid var(--navy); color: var(--navy); font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; }
 .kf-more > summary:hover { background: var(--navy); color: #fff; }
 .kf-more > summary::before,
 .voie-toggle > summary::after { content: "+"; font-size: 18px; line-height: 1; font-weight: 400; }
+.kf-more > summary::before { font-size: 13px; }
 .kf-more[open] > summary::before,
 .voie-toggle[open] > summary::after { content: "−"; }
 .kf-more .when-open,
@@ -668,6 +669,12 @@ form.contact-form { display: flex; flex-direction: column; gap: 20px; }
 .epreuves-table thead th:last-child { background-position: left bottom; background-size: calc(100% - 12px) 1px; }
 .epreuves-table tbody th[scope="rowgroup"] { padding: 10px 12px 4px; font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); text-align: left; }
 .epreuves-table tbody:first-of-type th[scope="rowgroup"] { padding-top: 8px; }
+/* Space between the written and the oral groups */
+.epreuves-table tbody + tbody th[scope="rowgroup"] { padding-top: 32px; }
+/* Table of differences with the concours externe: three text columns */
+.epreuves-table.is-diff th:nth-child(2), .epreuves-table.is-diff td:nth-child(2) { width: 24%; }
+.epreuves-table.is-diff th:last-child, .epreuves-table.is-diff td:last-child { width: 40%; text-align: left; }
+.epreuves-table.is-diff td:last-child { font-size: 13px; }
 .epreuves-table td { background: var(--bg-soft); border-bottom: 1px solid var(--border); font-size: 13px; color: var(--text-soft); }
 .epreuves-table td:first-child { font-family: var(--serif); font-size: 15px; color: var(--ink); }
 .epreuves-table td:last-child { font-size: 14px; }
