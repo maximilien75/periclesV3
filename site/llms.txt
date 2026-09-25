@@ -5,6 +5,7 @@
 ## Pages
 
 - [Accueil — Prépa Concours](https://www.prepapericles.com/) : présentation générale, concours préparés, méthode, épreuves travaillées, tarif.
+  - [Concours EN3S](https://www.prepapericles.com/concours/en3s/) : chiffres clefs, épreuves, regard du jury, règles éliminatoires, calendrier et liens officiels du concours d'entrée à l'EN3S.
 - [Coaching Grand Oral](https://www.prepapericles.com/coaching-grand-oral/) : préparation aux épreuves orales d'admission.
 - [Fiches méthode](https://www.prepapericles.com/fiches-methode/) : fiches méthodologiques en accès libre.
   - [La note de synthèse](https://www.prepapericles.com/fiches-methode/note-de-synthese/)

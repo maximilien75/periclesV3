@@ -12,6 +12,8 @@
   --border-soft: #e6e8ee;
   --bg-soft: #f5f6f8;
   --error: #9b2226;
+  --ocre: #a8741a;
+  --hand: 'Patrick Hand', cursive;
   --serif: 'Libre Baskerville', Georgia, serif;
   --sans: 'Public Sans', system-ui, -apple-system, sans-serif;
 }
@@ -83,10 +85,39 @@ img { max-width: 100%; }
   padding-top: 3px;
   padding-bottom: 2px;
 }
-.nav-links a[aria-current="page"] {
+.nav-links a[aria-current="page"],
+.nav-links a[aria-current="true"] {
   color: var(--navy);
   border-bottom-color: var(--navy);
 }
+
+/* « Prépa Concours » dropdown — opens on hover and keyboard focus, no JavaScript.
+   The wrapper's vertical padding keeps the pointer inside it on the way down to the panel. */
+.nav-dropdown { position: relative; padding: 22px 0; margin: -22px 0; }
+.nav-dropdown-panel {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: -20px;
+  z-index: 50;
+  background: #fff;
+  border: 1px solid var(--navy);
+  padding: 16px 20px 14px;
+  box-shadow: 0 10px 30px rgba(16, 18, 22, 0.08);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+}
+.nav-dropdown:hover .nav-dropdown-panel,
+.nav-dropdown:focus-within .nav-dropdown-panel { display: block; }
+.nav-dropdown-title { font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--navy); margin: 0 0 6px; }
+.nav-dropdown-panel ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.nav-dropdown-panel li > a,
+.nav-dropdown-panel li > span { display: flex; align-items: center; padding: 5px 0; font-family: var(--serif); font-size: 15px; line-height: 1.35; color: var(--ink); white-space: nowrap; border-bottom: 0; }
+.nav-dropdown-panel li > a:hover { color: var(--navy); text-decoration: underline; text-underline-offset: 3px; }
+.nav-dropdown-panel li > a[aria-current="page"] { color: var(--ink); border-bottom: 0; }
+.nav-dropdown-panel li > a[aria-current="page"]::before { content: ""; width: 18px; height: 1px; margin-right: 10px; background: var(--navy); }
 
 .btn-contact-header {
   border: 1px solid var(--navy);
@@ -138,6 +169,11 @@ img { max-width: 100%; }
   text-transform: uppercase;
   color: var(--ink);
 }
+.mobile-panel a.mobile-parent { border-bottom: none; padding-bottom: 6px; }
+.mobile-sub { list-style: none; margin: 0; padding: 0 0 12px 16px; border-bottom: 1px solid var(--border-soft); display: flex; flex-direction: column; }
+.mobile-panel .mobile-sub a,
+.mobile-sub span { display: block; padding: 7px 0; border-bottom: none; font-family: var(--serif); font-size: 15px; font-weight: 400; letter-spacing: normal; text-transform: none; line-height: 1.4; color: var(--ink); }
+.mobile-panel .mobile-sub a[aria-current="page"] { color: var(--navy); text-decoration: underline; text-underline-offset: 3px; }
 .mobile-panel a.btn-contact-mobile {
   margin-top: 18px;
   background: var(--navy);
@@ -485,6 +521,225 @@ form.contact-form { display: flex; flex-direction: column; gap: 20px; }
 .merci-page { padding: clamp(64px, 10vw, 140px) clamp(18px, 4vw, 56px); max-width: 640px; margin: 0 auto; text-align: left; }
 .merci-page h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(27px, 3.3vw, 40px); line-height: 1.3; margin: 0 0 20px; }
 .merci-page p { font-size: 17px; line-height: 1.85; color: var(--text); font-weight: 300; margin: 0 0 28px; }
+
+/* ---------- Pages concours (gabarit : /concours/<concours>/) ---------- */
+
+/* --header-h: height of the sticky .site-header (16px padding x2 + 42px logo + 1px border). */
+.concours { --header-h: 75px; }
+
+.visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+.concours-layout {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 clamp(18px, 4vw, 56px) 40px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 64px;
+}
+
+/* Sommaire — desktop column */
+.toc-aside { display: none; }
+.toc-aside nav { position: sticky; top: calc(var(--header-h) - 40px); padding-top: 72px; }
+.toc-title { font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--navy); margin: 0 0 18px; }
+.toc-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.toc-list a { display: flex; align-items: baseline; padding: 7px 0; font-size: 15px; line-height: 1.35; color: var(--text-soft); }
+.toc-list a::before { content: ""; flex: none; align-self: center; width: 0; height: 1px; margin-right: 0; background: var(--navy); transition: width .25s, margin-right .25s; }
+.toc-list a:hover { color: var(--navy); }
+.toc-list a[aria-current="location"] { color: var(--navy); font-weight: 600; }
+.toc-list a[aria-current="location"]::before { width: 22px; margin-right: 12px; }
+.toc-maj { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-muted); }
+
+/* Sommaire — mobile bar under the header */
+.toc-mobile { position: sticky; top: var(--header-h); z-index: 30; background: #fff; border-bottom: 1px solid var(--border); }
+.toc-mobile summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 52px;
+  padding: 10px clamp(18px, 4vw, 56px);
+  cursor: pointer;
+}
+.toc-mobile summary::-webkit-details-marker { display: none; }
+.toc-mobile-head { display: flex; flex-direction: column; line-height: 1.3; }
+.toc-mobile-kicker { font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--navy); }
+.toc-mobile-current { font-size: 15px; color: var(--ink); }
+.toc-mobile-chevron { font-size: 14px; color: var(--navy); transition: transform .2s; }
+.toc-mobile[open] .toc-mobile-chevron { transform: rotate(180deg); }
+.toc-mobile-list { list-style: none; margin: 0; padding: 4px clamp(18px, 4vw, 56px) 14px; border-top: 1px solid var(--border-soft); display: flex; flex-direction: column; }
+.toc-mobile-list a { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 10px 0; font-size: 15px; color: var(--text-soft); }
+.toc-mobile-list a span { width: 18px; font-size: 12px; color: var(--text-muted); }
+.toc-mobile-list a[aria-current="location"] { color: var(--navy); font-weight: 600; }
+
+@media (min-width: 900px) {
+  .concours-layout { grid-template-columns: 230px minmax(0, 1fr); }
+  .toc-aside { display: block; }
+  .toc-mobile { display: none; }
+}
+
+/* Sections */
+.concours-section { padding: 64px 0; border-bottom: 1px solid var(--border); scroll-margin-top: calc(var(--header-h) + 76px); }
+@media (min-width: 900px) { .concours-section { scroll-margin-top: calc(var(--header-h) + 16px); } }
+.concours-section h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(26px, 3.2vw, 38px); line-height: 1.25; margin: 0 0 32px; }
+.concours-section .eyebrow { margin-bottom: 14px; }
+
+/* 01 En-tête */
+.concours-head { padding: 72px 0 56px; }
+.concours-head .eyebrow { margin-bottom: 22px; }
+.concours-head h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 4.4vw, 52px); line-height: 1.18; letter-spacing: -0.01em; margin: 0 0 20px; text-wrap: balance; }
+.concours-organisme { font-family: var(--serif); font-size: clamp(18px, 1.9vw, 22px); line-height: 1.5; margin: 0 0 28px; }
+.concours-meta { display: flex; flex-wrap: wrap; gap: 12px 40px; margin: 0; font-size: 14px; }
+.concours-meta div { display: flex; gap: 8px; }
+.concours-meta dt { color: var(--text-muted); }
+.concours-meta dd { margin: 0; font-weight: 500; }
+
+/* 02 Chiffres clefs — one block per voie (1 to 3), side by side when each gets 330px, stacked otherwise */
+.kf { container-type: inline-size; }
+.kf-voies { display: grid; grid-template-columns: minmax(0, 1fr); }
+.kf-voie { padding: 28px 0 26px; display: flex; flex-direction: column; gap: 26px; min-width: 0; container-type: inline-size; }
+.kf-voie + .kf-voie { border-top: 1px solid var(--navy); }
+.kf-voie h3 { font-family: var(--serif); font-weight: 400; font-size: 22px; line-height: 1.25; margin: 0; }
+@container (min-width: 660px) {
+  .kf-voies[data-voies="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kf-voies[data-voies="2"] .kf-voie + .kf-voie { border-top: 0; border-left: 1px solid var(--navy); padding-left: 40px; }
+  .kf-voies[data-voies="2"] .kf-voie:not(:last-child) { padding-right: 40px; }
+}
+@container (min-width: 990px) {
+  .kf-voies[data-voies="3"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .kf-voies[data-voies="3"] .kf-voie + .kf-voie { border-top: 0; border-left: 1px solid var(--navy); padding-left: 40px; }
+  .kf-voies[data-voies="3"] .kf-voie:not(:last-child) { padding-right: 40px; }
+}
+.kf-ind { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr) minmax(0, 1.3fr); }
+.kf-item { display: grid; grid-template-rows: auto 1fr; row-gap: 10px; align-content: start; min-width: 0; }
+.kf-item:not(:last-child) { margin-right: 12px; }
+.kf-item + .kf-item { border-left: 1px solid var(--border); padding-left: 12px; }
+/* Handwritten figures stay real text; all sit upright on one shared baseline. */
+.kf-num { font-family: var(--hand); font-size: min(62px, 10.45cqi); font-weight: 400; line-height: 1; color: var(--ocre); white-space: nowrap; margin: 0; }
+.kf-unit { font-size: 0.6em; margin-left: 0.12em; }
+.kf-label { font-size: 13px; line-height: 1.4; color: var(--text-soft); margin: 0; }
+.kf-notes { margin-top: 20px; display: flex; flex-direction: column; gap: 4px; font-size: 13px; line-height: 1.55; color: var(--text-muted); }
+.kf-notes p { margin: 0; }
+
+/* 03 Le Brief */
+.concours-prose { max-width: 720px; display: flex; flex-direction: column; gap: 18px; }
+.concours-prose p { margin: 0; font-size: 18px; line-height: 1.75; color: var(--text); font-weight: 300; text-wrap: pretty; }
+
+/* 04 Les épreuves — récapitulatif */
+.epreuves-wrap { border-top: 1px solid var(--navy); margin-bottom: 48px; }
+.epreuves-table { width: calc(100% + 24px); margin: 0 -12px; border-collapse: collapse; line-height: 1.3; }
+.epreuves-table th, .epreuves-table td { text-align: left; vertical-align: baseline; padding: 5px 16px 5px 0; }
+.epreuves-table th:first-child, .epreuves-table td:first-child { padding-left: 12px; }
+.epreuves-table th:last-child, .epreuves-table td:last-child { padding-right: 12px; text-align: right; width: 100px; }
+.epreuves-table th:nth-child(2), .epreuves-table td:nth-child(2) { width: 30%; }
+@media (min-width: 1100px) { .epreuves-table th:nth-child(2), .epreuves-table td:nth-child(2) { width: 260px; } }
+/* Column headers: the rule stops at the text edges, rows' grey band bleeds 12px on each side. */
+.epreuves-table thead th {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--navy);
+  background: linear-gradient(var(--navy), var(--navy)) no-repeat bottom / 100% 1px;
+}
+.epreuves-table thead th:first-child { background-position: right bottom; background-size: calc(100% - 12px) 1px; }
+.epreuves-table thead th:last-child { background-position: left bottom; background-size: calc(100% - 12px) 1px; }
+.epreuves-table tbody th[scope="rowgroup"] { padding: 10px 12px 4px; font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); text-align: left; }
+.epreuves-table tbody:first-of-type th[scope="rowgroup"] { padding-top: 8px; }
+.epreuves-table td { background: var(--bg-soft); border-bottom: 1px solid var(--border); font-size: 13px; color: var(--text-soft); }
+.epreuves-table td:first-child { font-family: var(--serif); font-size: 15px; color: var(--ink); }
+.epreuves-table td:last-child { font-size: 14px; }
+
+/* 04 Les épreuves — présentation */
+.concours-subhead { margin: 0 0 20px; font-size: 13px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); display: flex; align-items: center; gap: 14px; }
+.concours-subhead::before { content: ""; width: 24px; height: 1px; background: currentColor; }
+.concours-subhead.is-oral { color: var(--navy); }
+
+/* Écrits: cards share row tracks (meta / title / text) so every text starts on the same line. */
+.blocs-ecrits { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 8px 20px; margin-bottom: 48px; }
+.bloc-ecrit { border-top: 2px solid var(--ink); padding-top: 16px; margin-bottom: 12px; display: grid; grid-row: span 3; grid-template-rows: subgrid; row-gap: 8px; align-content: start; }
+.bloc-meta { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); margin: 0; }
+.bloc-ecrit h4, .bloc-oral h4 { font-family: var(--serif); font-weight: 400; font-size: 19px; line-height: 1.35; margin: 0; }
+.bloc-ecrit p:last-child, .bloc-oral p:last-child { font-size: 15px; line-height: 1.65; color: var(--text-soft); font-weight: 300; margin: 0; }
+
+.blocs-oraux { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 40px; align-items: stretch; }
+.bloc-oral { flex: 1 1 260px; background: var(--bg-soft); padding: 22px 22px 24px; display: flex; flex-direction: column; gap: 8px; }
+.bloc-oral .bloc-meta { letter-spacing: 0.1em; color: var(--navy); }
+@media (min-width: 760px) { .bloc-oral .bloc-meta { white-space: nowrap; } }
+
+.poids-oral { background: var(--navy); color: #fff; padding: 32px 36px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 20px 40px; align-items: start; }
+.poids-oral > div { display: flex; flex-direction: column; gap: 10px; }
+.poids-oral-kicker { font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: #ccd5e7; }
+.poids-oral h3 { font-family: var(--serif); font-weight: 400; font-size: 24px; line-height: 1.3; margin: 0; }
+.poids-oral p { margin: 0; font-size: 16px; line-height: 1.7; color: #dde3ee; font-weight: 300; }
+
+/* 05 Le regard du jury — cards share row tracks (épreuve / phrase-clé / observations) */
+.jury-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 20px; }
+.jury-card { border: 1px solid var(--border); padding: 26px 26px 24px; display: grid; grid-row: span 3; grid-template-rows: subgrid; row-gap: 16px; align-content: start; }
+.jury-epreuve { font-size: 12px; font-weight: 600; line-height: 1.5; letter-spacing: 0.16em; text-transform: uppercase; color: var(--navy); margin: 0; }
+.jury-cle { font-family: var(--serif); font-size: 19px; line-height: 1.45; color: var(--ink); margin: 0; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+.jury-obs { display: flex; flex-direction: column; gap: 10px; }
+.jury-obs p { margin: 0; font-size: 15px; line-height: 1.65; color: var(--text-soft); font-weight: 300; }
+
+.dash-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.dash-list li { display: flex; gap: 10px; font-size: 15px; line-height: 1.55; color: var(--text-soft); font-weight: 300; }
+.dash-list li::before { content: "—"; color: var(--navy); }
+
+/* 06 Règles éliminatoires et voies d'accès */
+.regles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 40px; }
+.regles-grid h3 { margin: 0 0 16px; font-size: 13px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--navy); }
+.rule-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--navy); }
+.rule-list li { padding: 14px 0; border-bottom: 1px solid var(--border); display: flex; gap: 14px; font-size: 16px; line-height: 1.65; color: var(--text); font-weight: 300; }
+.rule-list li::before { content: "—"; color: var(--navy); }
+
+/* 07 Calendrier — vertical list by default, one-line timeline when each step gets 110px */
+.cal-wrap { container-type: inline-size; }
+.cal { list-style: none; margin: 36px 0 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); }
+.cal li { position: relative; border-left: 1px solid var(--navy); padding: 0 0 26px 26px; display: flex; flex-direction: column; gap: 6px; }
+.cal li::before { content: ""; position: absolute; left: -7px; top: 2px; width: 13px; height: 13px; box-sizing: border-box; border-radius: 50%; background: #fff; border: 2px solid var(--navy); }
+.cal-step { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); }
+.cal-date { font-family: var(--serif); font-size: 16px; line-height: 1.4; color: var(--ink); }
+@container (min-width: 660px) {
+  .cal { grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); grid-template-rows: auto auto; }
+  /* Steps share row tracks so every date starts on the same line, even under a two-line step name. */
+  .cal li { border-left: 0; border-top: 1px solid var(--navy); padding: 26px 14px 0 0; display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 6px; align-content: start; }
+  .cal li::before { left: 0; top: -7px; }
+}
+.next-session { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; background: var(--navy); color: #fff; padding: 10px 18px; margin-top: 44px; font-size: 14px; }
+.next-session-label { font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; }
+.next-session-sep { width: 1px; height: 16px; background: #6c7aa0; }
+.next-session-text { font-style: italic; }
+
+/* 08 Liens officiels */
+.concours-section.is-last { border-bottom: 0; padding-bottom: 72px; }
+.official-links { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--navy); max-width: 720px; }
+.official-links li { border-bottom: 1px solid var(--border); }
+.official-links a { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; align-items: center; gap: 18px; min-height: 44px; padding: 18px 4px; color: var(--ink); }
+.official-links a:hover { background: var(--bg-soft); color: var(--navy); }
+.official-check { width: 22px; height: 22px; border: 1.5px solid var(--navy); display: flex; align-items: center; justify-content: center; font-size: 14px; line-height: 1; color: var(--navy); }
+.official-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.official-label { font-family: var(--serif); font-size: 17px; line-height: 1.4; }
+.official-url { font-size: 13px; color: var(--text-muted); overflow-wrap: anywhere; }
+.official-arrow { font-size: 16px; color: var(--navy); }
+
+/* Prise de contact */
+.concours-contact { border-top: 1px solid var(--navy); padding: 64px 0 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 32px 64px; align-items: center; }
+.concours-contact .eyebrow { margin-bottom: 20px; }
+.concours-contact h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(23px, 2.2vw, 28px); line-height: 1.35; margin: 0; max-width: 22ch; text-wrap: balance; }
+.concours-contact-action { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; }
+.concours-contact-action p { margin: 0; font-size: 17px; line-height: 1.7; color: var(--text); font-weight: 300; }
+.concours-contact .btn { white-space: nowrap; }
+
+@media (max-width: 600px) {
+  .concours-head { padding: 40px 0 40px; }
+  .concours-section { padding: 48px 0; }
+  .poids-oral { padding: 26px 22px; }
+  .jury-card { padding: 22px 20px 20px; }
+  .concours-contact .btn { white-space: normal; text-align: center; align-self: stretch; }
+}
 
 /* ---------- Footer ---------- */
 
