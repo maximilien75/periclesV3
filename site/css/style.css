@@ -156,11 +156,24 @@ img { max-width: 100%; }
 .mobile-menu[open] summary span:nth-child(2) { opacity: 0; }
 .mobile-menu[open] summary span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
+/* The open panel drops below the header bar (not beside the logo) and fills the screen,
+   so the Contact button pinned at its bottom is always in view. */
 .mobile-panel {
   display: flex;
   flex-direction: column;
-  padding: 4px 18px 26px;
+  padding: 4px 18px 0;
   border-top: 1px solid var(--border-soft);
+}
+.mobile-menu[open] .mobile-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: calc(100vh - var(--header-h, 75px));
+  height: calc(100dvh - var(--header-h, 75px));
+  overflow-y: auto;
+  background: #fff;
+  border-bottom: 1px solid var(--navy);
 }
 .mobile-panel a {
   padding: 16px 0;
@@ -171,13 +184,16 @@ img { max-width: 100%; }
   text-transform: uppercase;
   color: var(--ink);
 }
-.mobile-panel a.mobile-parent { border-bottom: none; padding-bottom: 6px; }
-.mobile-sub { list-style: none; margin: 0; padding: 0 0 12px 16px; border-bottom: 1px solid var(--border-soft); display: flex; flex-direction: column; }
-.mobile-panel .mobile-sub a,
-.mobile-sub span { display: block; padding: 7px 0; border-bottom: none; font-family: var(--serif); font-size: 15px; font-weight: 400; letter-spacing: normal; text-transform: none; line-height: 1.4; color: var(--ink); }
-.mobile-panel .mobile-sub a[aria-current="page"] { color: var(--navy); text-decoration: underline; text-underline-offset: 3px; }
+.m-kicker { margin: 14px 0 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--navy); }
+.m-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+.mobile-panel .m-grid a { padding: 12px 10px; border: 1px solid var(--border); font-family: var(--serif); font-size: 15px; font-weight: 400; letter-spacing: normal; text-transform: none; line-height: 1.3; color: var(--ink); }
+.mobile-panel .m-grid a[aria-current="page"] { border-color: var(--navy); box-shadow: inset 0 0 0 1px var(--navy); }
+.m-grid small { display: block; margin-top: 2px; font-family: var(--sans); font-size: 11px; line-height: 1.35; color: var(--text-muted); }
+.m-spacer { flex: 1; }
+.m-bottom { position: sticky; bottom: 0; margin-top: 10px; padding: 12px 0 18px; background: #fff; border-top: 1px solid var(--border-soft); }
 .mobile-panel a.btn-contact-mobile {
-  margin-top: 18px;
+  display: block;
+  margin-top: 0;
   background: var(--navy);
   color: #fff;
   text-align: center;
@@ -684,6 +700,18 @@ form.contact-form { display: flex; flex-direction: column; gap: 20px; }
 .epreuves-table td:first-child { font-family: var(--serif); font-size: 15px; color: var(--ink); }
 .epreuves-table td:last-child { font-size: 14px; }
 .cell-na { font-style: italic; color: var(--text-muted); }
+/* Narrowest phones: slimmer coefficient column so the table fits */
+@media (max-width: 400px) {
+  .epreuves-table { table-layout: fixed; }
+  .epreuves-table th:last-child, .epreuves-table td:last-child { width: 48px; }
+  .epreuves-table th, .epreuves-table td { padding-right: 10px; overflow-wrap: break-word; }
+  /* « Coefficient » does not fit: shown as « Coef. » (the full word stays in the markup) */
+  .epreuves-table thead th:last-child { font-size: 0; letter-spacing: 0; }
+  .epreuves-table thead th:last-child::after { content: "Coef."; font-size: 11px; letter-spacing: 0.1em; }
+  .epreuves-table.is-diff th:last-child, .epreuves-table.is-diff td:last-child { width: 40%; }
+  .epreuves-table.is-diff thead th:last-child { font-size: 11px; letter-spacing: 0.1em; }
+  .epreuves-table.is-diff thead th:last-child::after { content: none; }
+}
 
 /* 04 Les épreuves — présentation */
 .concours-subhead { margin: 0 0 20px; font-size: 13px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); display: flex; align-items: center; gap: 14px; }
@@ -784,14 +812,15 @@ form.contact-form { display: flex; flex-direction: column; gap: 20px; }
 .concours-contact h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(23px, 2.2vw, 28px); line-height: 1.35; margin: 0; max-width: 22ch; text-wrap: balance; }
 .concours-contact-action { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; }
 .concours-contact-action p { margin: 0; font-size: 17px; line-height: 1.7; color: var(--text); font-weight: 300; }
-.concours-contact .btn { white-space: nowrap; }
+/* One line where the two columns leave room for it; wraps on tablets and phones. */
+@media (min-width: 900px) { .concours-contact .btn { white-space: nowrap; } }
 
 @media (max-width: 600px) {
   .concours-head { padding: 40px 0 40px; }
   .concours-section { padding: 48px 0; }
   .poids-oral { padding: 26px 22px; }
   .jury-card { padding: 22px 20px 20px; }
-  .concours-contact .btn { white-space: normal; text-align: center; align-self: stretch; }
+  .concours-contact .btn { text-align: center; align-self: stretch; }
 }
 
 /* ---------- Footer ---------- */
