@@ -741,6 +741,9 @@ form.contact-form { display: flex; flex-direction: column; gap: 20px; }
 
 /* 07 Calendrier — vertical list by default, one-line timeline when each step gets 110px */
 .cal-wrap { container-type: inline-size; }
+/* One timeline per voie when their dates differ */
+.concours-subhead.cal-voie { margin: 36px 0 0; }
+.cal-voie + .cal-wrap .cal { margin-top: 24px; }
 .cal { list-style: none; margin: 36px 0 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); }
 .cal li { position: relative; border-left: 1px solid var(--navy); padding: 0 0 26px 26px; display: flex; flex-direction: column; gap: 6px; }
 .cal li::before { content: ""; position: absolute; left: -7px; top: 2px; width: 13px; height: 13px; box-sizing: border-box; border-radius: 50%; background: #fff; border: 2px solid var(--navy); }
