@@ -6,6 +6,10 @@
 
 - [Accueil — Prépa Concours](https://www.prepapericles.com/) : présentation générale, concours préparés, méthode, épreuves travaillées, tarif.
   - [Concours EN3S](https://www.prepapericles.com/concours/en3s/) : chiffres clefs, épreuves, regard du jury, règles éliminatoires, calendrier et liens officiels du concours d'entrée à l'EN3S.
+  - [Concours INSP](https://www.prepapericles.com/concours/insp/) : chiffres clefs, épreuves, regard du jury, règles, calendrier et liens officiels du concours d’entrée à l’INSP.
+  - [Concours INET](https://www.prepapericles.com/concours/inet/) : chiffres clefs, épreuves, regard du jury, règles, calendrier et liens officiels du concours d’administrateur territorial.
+  - [Concours directeur d’hôpital](https://www.prepapericles.com/concours/directeur-hopital/) : chiffres clefs, épreuves, regard du jury, voies d’accès, calendrier et liens officiels du concours de directeur d’hôpital (EHESP).
+  - [Concours inspecteur des douanes](https://www.prepapericles.com/concours/douanes/) : chiffres clefs, épreuves, regard du jury, règles, calendrier et liens officiels du concours d’inspecteur des douanes.
 - [Coaching Grand Oral](https://www.prepapericles.com/coaching-grand-oral/) : préparation aux épreuves orales d'admission.
 - [Fiches méthode](https://www.prepapericles.com/fiches-methode/) : fiches méthodologiques en accès libre.
   - [La note de synthèse](https://www.prepapericles.com/fiches-methode/note-de-synthese/)

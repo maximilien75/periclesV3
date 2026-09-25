@@ -611,14 +611,33 @@ form.contact-form { display: flex; flex-direction: column; gap: 20px; }
   .kf-voies[data-voies="3"] .kf-voie + .kf-voie { border-top: 0; border-left: 1px solid var(--navy); padding-left: 40px; }
   .kf-voies[data-voies="3"] .kf-voie:not(:last-child) { padding-right: 40px; }
 }
-.kf-ind { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr) minmax(0, 1.3fr); }
-.kf-item { display: grid; grid-template-rows: auto 1fr; row-gap: 10px; align-content: start; min-width: 0; }
+/* Items share row tracks (figure / label) so labels line up even next to a « non publié ». */
+.kf-ind { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr) minmax(0, 1.3fr); grid-template-rows: auto auto; }
+.kf-item { display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 10px; align-content: start; min-width: 0; }
 .kf-item:not(:last-child) { margin-right: 12px; }
 .kf-item + .kf-item { border-left: 1px solid var(--border); padding-left: 12px; }
 /* Handwritten figures stay real text; all sit upright on one shared baseline. */
 .kf-num { font-family: var(--hand); font-size: min(62px, 10.45cqi); font-weight: 400; line-height: 1; color: var(--ocre); white-space: nowrap; margin: 0; }
 .kf-unit { font-size: 0.6em; margin-left: 0.12em; }
 .kf-label { font-size: 13px; line-height: 1.4; color: var(--text-soft); margin: 0; }
+.kf-na { align-self: end; font-size: 15px; font-style: italic; line-height: 1.3; color: var(--text-muted); margin: 0; }
+
+/* Voies beyond externe / interne: folded under a button */
+.kf-more { margin-top: 4px; }
+.kf-more > summary,
+.voie-toggle > summary { list-style: none; cursor: pointer; }
+.kf-more > summary::-webkit-details-marker,
+.voie-toggle > summary::-webkit-details-marker { display: none; }
+.kf-more > summary { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 10px 18px; border: 1px solid var(--navy); color: var(--navy); font-size: 13px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; }
+.kf-more > summary:hover { background: var(--navy); color: #fff; }
+.kf-more > summary::before,
+.voie-toggle > summary::after { content: "+"; font-size: 18px; line-height: 1; font-weight: 400; }
+.kf-more[open] > summary::before,
+.voie-toggle[open] > summary::after { content: "−"; }
+.kf-more .when-open,
+.kf-more[open] .when-closed { display: none; }
+.kf-more[open] .when-open { display: inline; }
+.kf-more > .kf { margin-top: 8px; border-top: 1px solid var(--navy); }
 .kf-notes { margin-top: 20px; display: flex; flex-direction: column; gap: 4px; font-size: 13px; line-height: 1.55; color: var(--text-muted); }
 .kf-notes p { margin: 0; }
 
@@ -657,6 +676,18 @@ form.contact-form { display: flex; flex-direction: column; gap: 20px; }
 .concours-subhead { margin: 0 0 20px; font-size: 13px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); display: flex; align-items: center; gap: 14px; }
 .concours-subhead::before { content: ""; width: 24px; height: 1px; background: currentColor; }
 .concours-subhead.is-oral { color: var(--navy); }
+
+/* Épreuves propres à chaque voie: one clickable heading per voie, content shown on click */
+.epreuves-intro { max-width: 720px; margin: 0 0 28px; font-size: 16px; line-height: 1.7; color: var(--text); font-weight: 300; }
+.voies-epreuves { margin-bottom: 40px; border-bottom: 1px solid var(--navy); }
+.voie-toggle { border-top: 1px solid var(--navy); }
+.voie-toggle > summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; padding: 14px 0; font-family: var(--serif); font-size: 21px; line-height: 1.3; color: var(--ink); }
+.voie-toggle > summary:hover { color: var(--navy); }
+.voie-toggle > summary::after { flex: none; color: var(--navy); font-size: 24px; }
+.voie-toggle-body { padding: 8px 0 12px; }
+.voie-toggle-body .epreuves-wrap,
+.voie-toggle-body .blocs-ecrits { margin-bottom: 36px; }
+.voie-toggle-body > p { max-width: 720px; margin: 0 0 24px; font-size: 16px; line-height: 1.7; color: var(--text); font-weight: 300; }
 
 /* Écrits: cards share row tracks (meta / title / text) so every text starts on the same line. */
 .blocs-ecrits { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 8px 20px; margin-bottom: 48px; }
@@ -703,10 +734,16 @@ form.contact-form { display: flex; flex-direction: column; gap: 20px; }
 .cal-step { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); }
 .cal-date { font-family: var(--serif); font-size: 16px; line-height: 1.4; color: var(--ink); }
 @container (min-width: 660px) {
-  .cal { grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); grid-template-rows: auto auto; }
+  .cal:not(.is-long) { grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); grid-template-rows: auto auto; }
   /* Steps share row tracks so every date starts on the same line, even under a two-line step name. */
-  .cal li { border-left: 0; border-top: 1px solid var(--navy); padding: 26px 14px 0 0; display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 6px; align-content: start; }
-  .cal li::before { left: 0; top: -7px; }
+  .cal:not(.is-long) li { border-left: 0; border-top: 1px solid var(--navy); padding: 26px 14px 0 0; display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 6px; align-content: start; }
+  .cal:not(.is-long) li::before { left: 0; top: -7px; }
+}
+/* Seven steps or more (.is-long) need 110px each before going horizontal. */
+@container (min-width: 800px) {
+  .cal.is-long { grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); grid-template-rows: auto auto; }
+  .cal.is-long li { border-left: 0; border-top: 1px solid var(--navy); padding: 26px 14px 0 0; display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 6px; align-content: start; }
+  .cal.is-long li::before { left: 0; top: -7px; }
 }
 .next-session { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; background: var(--navy); color: #fff; padding: 10px 18px; margin-top: 44px; font-size: 14px; }
 .next-session-label { font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; }
