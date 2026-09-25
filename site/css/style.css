@@ -290,6 +290,9 @@ img { max-width: 100%; }
   gap: 12px;
 }
 .hero-list li { font-family: var(--serif); font-size: 17px; line-height: 1.5; }
+/* Concours with their own page: underlined so they read as links */
+.hero-list a { color: var(--navy); text-decoration: underline; text-decoration-color: #c9ccd4; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.hero-list a:hover { color: var(--navy-hover); text-decoration-color: currentColor; }
 .hero-ref { font-size: 15px; line-height: 1.7; color: var(--text-muted); font-weight: 300; margin: 0; font-style: italic; }
 
 /* Bottoms of both hero columns line up: CTA button, side border and closing line end together. */
